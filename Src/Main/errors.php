@@ -64,6 +64,7 @@ $error_messages = [
  * @param int $line_number Line number where error occurred
  * @param string $custom_message Optional custom message
  * @param string $custom_tip Optional custom tip
+ * 
  */
 function asd_error($error_type, $error_code, $line_number, $custom_message = null, $custom_tip = null) {
     global $error_messages;

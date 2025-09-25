@@ -7,5 +7,8 @@
 
 PRINT write your name!
 SETVAR k READLINE()
-IF k == ANDREW THEN PRINT good name
-ELSE PRINT good name
+IF k == "andrew" THEN DO
+    PRINT good name Andrew 
+ELSE
+    PRINT good name =(k)
+END
