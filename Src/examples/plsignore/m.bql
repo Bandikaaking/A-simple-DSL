@@ -1,6 +1,0 @@
--- hello from bql
-
-Func main()
-{
-    System.out("hello")
-}
