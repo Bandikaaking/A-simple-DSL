@@ -1,0 +1,64 @@
+#!/usr/bin/env php
+<?php
+/*
+  ASD - A Small DSL
+  Fully modular main executable
+  License: MIT
+*/
+
+// --- Check arguments ---
+if ($argc < 2) die("Usage: asd <file.asd>\n");
+
+$file = $argv[1];
+if (!file_exists($file)) die("File not found: $file\n");
+
+// --- Variables ---
+$variables = [];
+$lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+// --- Include modules ---
+$moduleDir = __DIR__;
+require_once "$moduleDir/errors.php";
+require_once "$moduleDir/if_else_elseif_and_regex.php";
+require_once "$moduleDir/print_and_declarevars.php";
+require_once "$moduleDir/math_operations.php";
+require_once "$moduleDir/other_statements.php";
+require_once "$moduleDir/loop_statements.php";  // Fixed filename
+
+// --- Utilities ---
+function replace_vars($text, $variables) {
+    return preg_replace_callback('/=\((\w+)\)/', function($matches) use ($variables) {
+        return $variables[$matches[1]] ?? '';
+    }, $text);
+}
+
+function read_line() {
+    return trim(fgets(STDIN));
+}
+
+// --- Execute a line through all modules ---
+function execute_line_full($line, &$variables, &$lines, &$i) {
+    // Each module returns true if it handled the line
+    if (if_else_elseif($line, $variables, $lines, $i)) return;
+    if (print_and_declarevars($line, $variables)) return;
+    if (arithmetic_line($line, $variables)) return;
+    if (loop_line($line, $variables, $lines, $i)) return;
+    if (while_line($line, $variables, $lines, $i)) return;
+    if (readfile_line($line, $variables)) return;
+    if (sleep_line($line)) return;
+    if (random_line($line, $variables)) return;
+    if (len_line($line, $variables)) return;
+    if (upper_line($line, $variables)) return;
+    if (lower_line($line, $variables)) return;
+    if (replace_line($line, $variables)) return;
+}
+
+// --- Process a block of lines ---
+function process_block($lines, &$variables) {
+    for ($i = 0; $i < count($lines); $i++) {
+        execute_line_full($lines[$i], $variables, $lines, $i);
+    }
+}
+
+// --- Run the ASD script ---
+process_block($lines, $variables);

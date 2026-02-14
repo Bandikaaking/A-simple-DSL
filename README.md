@@ -1,7 +1,12 @@
 <h1 style="text-align: center; color: rgba(127, 141, 111, 1);">
 A simple DSL
 </h2>
+BASIC becuse:
 
+*("tbasic" hello world)*
+```BASIC
+10 PRINT "Hello, World!"
+```
 <p align="center">
   <img src="./Src/images/logo.png" alt="ASD logo" style="width: 184px; border-radius: 47px;">
 </p>
@@ -9,18 +14,9 @@ A simple DSL
 Ever wanted to just... **make** an *interpreter*, and just __USE__ it? Well, with ASD, you can do that! Install the **asd** command globaly (for ASD v1.2, you can only install it to Linux systems, And on WSL), and Run **.asd** files, from *everywhere* from you device
 
 
-# BIG UPDATE
-
-Everything is  now done!! next thing is propably making it modern with {} etc.
-Please... Give it a **STAR** if this helped you understand an interpreter
 
 ## ASD SYNTAX
-The syntax of ASD looks like, BASIC becuse:
-
-*("tbasic" hello world)*
-```BASIC
-10 PRINT "Hello, World!"
-```
+The syntax of ASD looks like, B
 
 *("ASD" hello world)*
 ```BASIC
